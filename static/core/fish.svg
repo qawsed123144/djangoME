@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 背景 -->
+  <rect width="100%" height="100%" fill="#87CEEB" />
+  
+  <!-- 魚身 -->
+  <ellipse cx="100" cy="100" rx="60" ry="40" fill="#FFA500" />
+  
+  <!-- 魚尾 -->
+  <polygon points="40,80 20,100 40,120" fill="#FF6347" />
+  
+  <!-- 魚眼 -->
+  <circle cx="130" cy="90" r="5" fill="#000" />
+  
+  <!-- 魚鰭 -->
+  <polygon points="80,60 90,90 80,120" fill="#FF4500" />
+  
+  <!-- 氣泡 -->
+  <circle cx="140" cy="50" r="10" fill="#E0FFFF" />
+  <circle cx="150" cy="30" r="7" fill="#E0FFFF" />
+  <circle cx="160" cy="15" r="5" fill="#E0FFFF" />
+</svg>
