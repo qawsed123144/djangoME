@@ -27,4 +27,5 @@ social-auth-core==4.5.4; python_version >= '3.8'
 sqlparse==0.5.3; python_version >= '3.8'
 urllib3==2.3.0; python_version >= '3.9'
 whitenoise==6.8.2; python_version >= '3.9'
+pymysql
 gunicorn
