@@ -84,10 +84,11 @@ WSGI_APPLICATION = 'pyshop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pyshop',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': 'qawsed22'
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),  # 使用 Cloud SQL Unix Socket
+        'PORT': os.getenv('DB_PORT', '3306'),
     }
 }
 
