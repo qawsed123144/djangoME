@@ -1,9 +1,8 @@
 from django.urls import path
-from django.views.generic import TemplateView
 from . import views
 
 
 urlpatterns = [
-    path('',TemplateView.as_view(template_name='core/index.html')),
+    path('', views.homepage, name="homepage"),
     path('cache-test/', views.cache_test),
 ]

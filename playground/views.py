@@ -3,6 +3,13 @@ from django.http import JsonResponse, HttpResponse
 import requests
 import logging
 
+def homepage(request):
+    data = {
+        "title": "My Homepage",
+        "description": "Welcome to my Django-powered homepage!"
+    }
+    return JsonResponse(data) 
+
 logger = logging.getLogger(__name__)
 
 @cache_page(60)

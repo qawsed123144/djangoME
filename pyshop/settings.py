@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'debug_toolbar',
     'rest_framework',
     'djoser',
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -84,11 +86,11 @@ WSGI_APPLICATION = 'pyshop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),  # 使用 Cloud SQL Unix Socket
-        'PORT': os.getenv('DB_PORT', '3306'),
+        'NAME': 'pyshop',
+        'USER': 'root',
+        'PASSWORD': 'qawsed22',
+        # 'HOST': os.getenv('DB_HOST'),  # 使用 Cloud SQL Unix Socket
+        # 'PORT': os.getenv('DB_PORT', '3306'),
     }
 }
 
@@ -154,7 +156,7 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
-
+CORS_ALLOW_ALL_ORIGINS = True
 AUTH_USER_MODEL = 'store.Customer'
 
 DJOSER = {
