@@ -1,0 +1,47 @@
+{% extends "admin/base.html" %}
+
+{% block title %}後台系統{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}">商店後台</a>
+</h1>
+{% endblock %}
+
+{% block nav-global %}
+  {{ block.super }}
+  <div style="padding: 10px; background: #240617; border: 1px solid #f0c36d; margin: 10px; color: white;">
+    🔧 測試功能：這是自定義 base.html 的提示區塊。
+    <button id="test-button" style="margin-left: 10px; background: #4caf50; color: white; padding: 4px 10px; border: none; border-radius: 4px; cursor: pointer;">
+      點我測試
+    </button>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const btn = document.getElementById("test-button");
+      if (btn) {
+        btn.addEventListener("click", function () {
+          alert("✅ 測試按鈕被點擊！");
+        });
+      }
+    });
+  </script>
+{% endblock %}
+{% block extrastyle %}
+  {{ block.super }}
+  <style>
+    #header {
+      background: linear-gradient(to right, #4a148c, #880e4f) !important;
+      color: white;
+    }
+    #user-tools a {
+      color: #ffe082 !important;
+      font-weight: bold;
+    }
+    #branding h1 {
+      font-family: "Segoe UI", sans-serif;
+      font-size: 48px;
+      color: #fff176;
+    }
+  </style>
+{% endblock %}

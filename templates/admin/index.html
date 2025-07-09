@@ -1,0 +1,62 @@
+{% extends "admin/index.html" %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  <style>
+    body {
+      background: linear-gradient(to right, #fdfbfb, #ebedee);
+    }
+
+    .custom-dashboard {
+      padding: 20px;
+      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      color: #4a148c;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .app-auth, .app-library, .app-store {
+      background: #ffffff;
+      padding: 14px;
+      border-left: 5px solid #64b5f6;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      transition: transform 0.2s ease;
+    }
+
+    .app-auth:hover,
+    .app-library:hover,
+    .app-store:hover {
+      transform: scale(1.02);
+      background: #e3f2fd;
+    }
+
+    .module caption {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #1e88e5;
+      letter-spacing: 0.5px;
+    }
+
+    #recent-actions-module {
+      border-left: 6px solid #81c784;
+      background: #f1f8e9;
+      padding: 12px;
+      border-radius: 10px;
+    }
+
+    #recent-actions-module h2 {
+      color: #2e7d32;
+      font-size: 1.1em;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="custom-dashboard">
+    🎉 歡迎來到以合商店後台！這裡可以管理你的商品、訂單、客戶與內容 🎯
+  </div>
+  {{ block.super }}
+{% endblock %}

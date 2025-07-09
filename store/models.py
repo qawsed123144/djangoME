@@ -60,12 +60,15 @@ class Customer(AbstractBaseUser, PermissionsMixin):
 
 
 class Address(models.Model):
-    # ForeignKey(1->1)
-    customer = models.OneToOneField(
-        Customer, primary_key=True, on_delete=models.CASCADE)
+    # ForeignKey(1->many)
+    customer = models.ForeignKey(
+        Customer, on_delete=models.CASCADE)
     zip = models.IntegerField(null=True)
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.city}, {self.street}, {self.zip or ''}"
 
 
 class Collection(models.Model):
@@ -112,6 +115,9 @@ class Review(models.Model):
 class Cart(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4)
     create_date = models.DateField(auto_now=True)
+    user = models.OneToOneField(
+        Customer, null=True, blank=True, on_delete=models.CASCADE
+    )
 
 
 class CartItem(models.Model):
@@ -135,9 +141,10 @@ class Order(models.Model):
         ('P', 'Pending'),
         ('C', 'Complete'),
         ('F', 'Failed')]
-    # ForeignKey(1->many)
     customer = models.ForeignKey(
-        Customer, on_delete=models.PROTECT)
+        Customer, on_delete=models.PROTECT, null=True, blank=True)  # 允許未登入用戶下單
+    shipping_address = models.ForeignKey(
+        'Address', null=True, blank=True, on_delete=models.SET_NULL, related_name='orders')
     status = models.CharField(max_length=1, choices=status, default='P')
     placed_at = models.DateField(auto_now=True)
 

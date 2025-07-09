@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,11 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_elasticsearch_dsl',
     'corsheaders',
     'debug_toolbar',
     'rest_framework',
     'djoser',
+    'markdownx',
+    'widget_tweaks',
     'store',
+    'library',
     'playground'
 ]
 
@@ -64,7 +69,7 @@ ROOT_URLCONF = 'pyshop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -88,7 +93,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'pyshop',
         'USER': 'root',
-        'PASSWORD': 'qawsed22',
+        'PASSWORD': '',
         # 'HOST': os.getenv('DB_HOST'),  # 使用 Cloud SQL Unix Socket
         # 'PORT': os.getenv('DB_PORT', '3306'),
     }
@@ -104,6 +109,11 @@ CACHES = {
     }
 }
 
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'http://localhost:9200'  
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -139,11 +149,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# 靜態檔案網址路徑
+STATIC_URL = '/static/'
+# 開發時來源目錄（你的原始 js/css 放這）
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+# 最終 collectstatic 要複製到哪裡（獨立資料夾！）
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/user/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MARKDOWNX_MEDIA_PATH = 'library/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -156,7 +173,14 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://192.168.0.108:3000"
+]
+
+# 3) 允許帶 Cookie
+CORS_ALLOW_CREDENTIALS = True
 AUTH_USER_MODEL = 'store.Customer'
 
 DJOSER = {
@@ -176,6 +200,10 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    # 是否刷新時重發 Refresh Token                 # 若 ROTATE 為 True，舊的 token 是否列入黑名單
+    'ROTATE_REFRESH_TOKENS': False,
     'AUTH_HEADER_TYPES': ('JWT',),
 }
 
@@ -196,7 +224,7 @@ LOGGING = {
         "file": {
             "class": "logging.FileHandler",
             "filename": "general.log",
-            "formatter": "verbose" #不同handler可以使用不同的formatter
+            "formatter": "verbose"  # 不同handler可以使用不同的formatter
         }
     },
     "loggers": {

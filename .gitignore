@@ -1,1 +1,26 @@
-general.log
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+.Python
+env/
+venv/
+myenv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Django
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+*.log
+
+# VSCode
+.vscode/
+
+# MacOS
+.DS_Store

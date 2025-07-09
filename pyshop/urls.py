@@ -23,11 +23,14 @@ import debug_toolbar
 admin.site.site_header = '後台網頁'
 admin.site.index_title = '管理員'
 
-urlpatterns = [    
+urlpatterns = [
     path('', include('playground.urls')),
     path('admin/', admin.site.urls),
     path('store/', include('store.urls')),
+    path('library/', include('library.urls')),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
+    path('markdownx/', include('markdownx.urls')),
     path('__debug__', include(debug_toolbar.urls))
-]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)\
+ + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
