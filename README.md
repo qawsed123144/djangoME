@@ -152,7 +152,7 @@ CORS_ALLOW_ALL_ORIGINS = True  # 開發環境使用
 
 ---
 
-## 🧱 技術堆疊
+## 技術堆疊
 
 | 類別     | 技術           |
 |----------|----------------|
@@ -165,7 +165,7 @@ CORS_ALLOW_ALL_ORIGINS = True  # 開發環境使用
 
 ---
 
-## 📁 其他說明（可選擇性擴充）
+## 其他說明（可選擇性擴充）
 
 - JWT 認證（建議使用 djoser）
 - Docker + Redis 快取
@@ -175,7 +175,7 @@ CORS_ALLOW_ALL_ORIGINS = True  # 開發環境使用
 
 ---
 
-## 📌 備註
+## 備註
 
 - 請確認本地 `Elasticsearch` 已啟動於 `localhost:9200`
 - 本專案為純後端 API，前端建議搭配 Next.js/React 以實現完整全文檢索功能
